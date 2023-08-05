@@ -1,6 +1,6 @@
 import { useVirtualKeyboardVisible } from "hooks";
-import React, { FC, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import React, { FC, useState } from "react";
+import { useNavigate } from "react-router";
 import { MenuItem } from "types/menu";
 import { BottomNavigation, Icon } from "zmp-ui";
 import { CartIcon } from "./cart-icon";
@@ -27,19 +27,12 @@ const tabs: Record<string, MenuItem> = {
 
 export type TabKeys = keyof typeof tabs;
 
-export const NO_BOTTOM_NAVIGATION_PAGES = ["/search", "/category"];
-
 export const Navigation: FC = () => {
   const [activeTab, setActiveTab] = useState<TabKeys>("/");
   const keyboardVisible = useVirtualKeyboardVisible();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const noBottomNav = useMemo(() => {
-    return NO_BOTTOM_NAVIGATION_PAGES.includes(location.pathname);
-  }, [location]);
-
-  if (noBottomNav || keyboardVisible) {
+  if (keyboardVisible) {
     return <></>;
   }
 

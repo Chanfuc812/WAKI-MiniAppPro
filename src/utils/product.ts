@@ -47,7 +47,7 @@ export function calcFinalPrice(product: Product, options?: SelectedOptions) {
 }
 
 export function getDummyImage(filename: string) {
-   return `../docs/dummy/${filename}`;
+  return `https://chanfuc812.github.io/Waki/dummy/${filename}`;
 }
 
 export function isIdentical(
