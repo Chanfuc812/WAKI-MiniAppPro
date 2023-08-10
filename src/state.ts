@@ -1,5 +1,5 @@
 import { atom, selector, selectorFamily } from "recoil";
-import { getLocation, getPhoneNumber, getUserInfo } from "zmp-sdk";
+import { getLocation, getUserInfo } from "zmp-sdk";
 import sondauIcon from "static/category-sondau.svg";
 import khacIcon from "static/category-khac.svg";
 import phongnguIcon from "static/category-phongngu.svg";
@@ -17,6 +17,7 @@ import { calculateDistance } from "utils/location";
 import { Store } from "types/delivery";
 import { calcFinalPrice, getDummyImage } from "utils/product";
 import { wait } from "utils/async";
+import api from "zmp-sdk";
 
 export const userState = selector({
   key: "user",
@@ -502,15 +503,31 @@ export const notificationsState = atom<Notification[]>({
     {
       id: 1,
       image: logo,
-      title: "Chào bạn mới",
+      title: "Chào bạn mới!",
       content:
-        "Cảm ơn đã sử dụng ZaUI Coffee, bạn có thể dùng ứng dụng này để tiết kiệm thời gian xây dựng",
+        "Cảm ơn đã sử dụng WAKI MiniApp, bạn có thể dùng ứng dụng này để chọn được những bức tranh và khung tranh phù hợp với mong muốn của bạn một cách nhanh chóng nhất.",
+      linkTo: "https://waki.vn",
     },
     {
       id: 2,
       image: logo,
-      title: "Giảm 50% lần đầu mua hàng",
-      content: "Nhập WELCOME để được giảm 50% giá trị đơn hàng đầu tiên order",
+      title: "Giảm đến 30% cho lần đầu mua hàng qua MiniApp WAKI",
+      content: "Nhập 'WAKI' để được giảm ngẫu nhiên từ 5-30% giá trị đơn hàng đầu tiên bạn order.",
+      linkTo: "https://waki.vn",
+    },
+    {
+      id: 3,
+      image: logo,
+      title: "Website chính thức của chúng tôi🔗 ",
+      content: "Tham khảo nhiều sản phẩm hơn trên Website chính thức waki.vn🔗",
+      linkTo: "https://waki.vn",
+    },
+    {
+      id: 4,
+      image: logo,
+      title: "Hotline tổng đài tư vấn 24/7📞  ",
+      content: "Tổng đài: (028) 73 088 089 - Hotline: 0909.439.071 ",
+      linkTo: "https://waki.vn",
     },
   ],
 });
@@ -610,6 +627,26 @@ export const requestPhoneTriesState = atom({
   default: 0,
 });
 
+const getUserLocationByToken = async (token) => {
+  // gọi API Server của bạn để truy xuất thông tin từ token và user access token
+};
+api.getLocation({
+  success: async (data) => {
+    // xử lý khi gọi api thành công
+    let { token, latitude, longitude } = data;
+    // xử lý cho trường hợp sử dụng phiên bản Zalo mới
+    if (token) {
+      const response = await getUserLocationByToken(token);
+      latitude = response.latitude;
+      longitude = response.longitude;
+    }
+  },
+  fail: (error) => {
+    // xử lý khi gọi api thất bại
+    console.log(error);
+  },
+});
+
 export const locationState = selector<
   { latitude: string; longitude: string } | false
 >({
@@ -643,25 +680,39 @@ export const locationState = selector<
   },
 });
 
+const getPhoneNumberByToken = async (token) => {
+  // gọi API Server của bạn để truy xuất thông tin từ token và user access token
+};
+
 export const phoneState = selector<string | boolean>({
   key: "phone",
   get: async ({ get }) => {
     const requested = get(requestPhoneTriesState);
     if (requested) {
-      const { number, token } = await getPhoneNumber({ fail: console.warn });
+      const { token, number } = await new Promise((resolve) => {
+        api.getPhoneNumber({
+          success: (data) => resolve(data),
+          fail: (error) => {
+            console.log(error);
+            resolve({ token: null, number: null });
+          },
+        });
+      });
+
+      if (token) {
+        const phoneNumber = await getPhoneNumberByToken(token);
+        if (phoneNumber) {
+          return phoneNumber;
+        }
+        console.warn("Giả lập số điện thoại mặc định: 0926547935");
+        return "0926547935";
+      }
+
       if (number) {
         return number;
       }
-      console.warn(
-        "Sử dụng token này để truy xuất số điện thoại của người dùng",
-        token
-      );
-      console.warn(
-        "Chi tiết tham khảo: ",
-        "https://mini.zalo.me/blog/thong-bao-thay-doi-luong-truy-xuat-thong-tin-nguoi-dung-tren-zalo-mini-app"
-      );
-      console.warn("Giả lập số điện thoại mặc định: 0926547935");
-      return "0926547935";
+
+      return false;
     }
     return false;
   },

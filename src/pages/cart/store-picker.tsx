@@ -66,7 +66,7 @@ export const RequestStorePickerLocation: FC = () => {
     <ListItem
       onClick={() => retry((r) => r + 1)}
       title="Chọn cửa hàng"
-      subtitle="Yêu cầu truy cập vị trí"
+      subtitle="Các cửa hàng gần bạn"
     />
   );
 };

@@ -11,10 +11,11 @@ export const TimePicker: FC = () => {
 
   const availableDates = useMemo(() => {
     const days: Date[] = [];
-    const today = new Date();
-    for (let i = 0; i < 5; i++) {
-      const nextDay = new Date(today);
-      nextDay.setDate(today.getDate() + i);
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1); // Ngày mai
+    for (let i = 0; i < 12; i++) {
+      const nextDay = new Date(tomorrow);
+      nextDay.setDate(tomorrow.getDate() + i);
       days.push(nextDay);
     }
     return days;
@@ -31,19 +32,19 @@ export const TimePicker: FC = () => {
       time.setMinutes(minutes);
     } else {
       // Starting time is 7:00
-      time.setHours(7);
+      time.setHours(8);
       time.setMinutes(0);
     }
     time.setSeconds(0);
     time.setMilliseconds(0);
     const endTime = new Date();
-    endTime.setHours(21);
+    endTime.setHours(19);
     endTime.setMinutes(0);
     endTime.setSeconds(0);
     endTime.setMilliseconds(0);
     while (time <= endTime) {
       times.push(new Date(time));
-      time.setMinutes(time.getMinutes() + 30);
+      time.setMinutes(time.getMinutes() + 60);
     }
     return times;
   }, [date]);

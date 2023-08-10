@@ -1,10 +1,11 @@
 {
-  "name": "ZaUI Coffee",
+  "name": "Waki",
   "options": {
     "headerLogo": {
       "title": "Header Logo",
       "description": "Đường dẫn tuyệt đối, bắt buộc phải có \"https://\". Nếu bạn muốn sử dụng logo của Mini App, bạn có thể lấy đường dẫn bằng cách truy cập trang quản lý ứng dụng trên mini.zalo.me, rồi nhấn chuột phải vào logo và chọn \"Copy Image Address\".",
       "type": "string",
+      "image":"https://photo-logo-mapps.zadn.vn/e2f69b1b3e5ed7008e4f.jpg",
       "optional": true
     },
     "primaryColor": {

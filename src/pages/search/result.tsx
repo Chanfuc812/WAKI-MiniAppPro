@@ -37,7 +37,7 @@ const SearchResultContent: FC = () => {
       ) : (
         <Box className="flex-1 flex justify-center items-center pb-24">
           <Text size="xSmall" className="text-gray">
-            Không tìm thấy kết quả. Vui lòng thử lại
+            Không tìm thấy kết quả! Vui lòng thử lại.
           </Text>
         </Box>
       )}

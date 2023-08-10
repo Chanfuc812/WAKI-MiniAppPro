@@ -1,4 +1,4 @@
-# ZaUI Coffee
+# WAKI MiniApp 
 
 <p style="display: flex; flex-wrap: wrap; gap: 4px">
   <a href="https://github.com/zalo-MiniApp/zaui-coffee/actions/workflows/zalo-mini-app.yml" style="display: flex">

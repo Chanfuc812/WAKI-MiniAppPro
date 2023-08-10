@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { matchStatusBarColor } from "utils/device";
 import { useSnackbar } from "zmp-ui";
+import { addRating } from "zmp-sdk/apis";
 
 export function useMatchStatusTextColor(visible?: boolean) {
   const changedRef = useRef(false);
@@ -39,3 +40,5 @@ export function useToBeImplemented() {
       text: "Chức năng dành cho các bên tích hợp phát triển...",
     });
 }
+
+

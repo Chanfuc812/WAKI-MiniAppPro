@@ -24,7 +24,7 @@ export const Welcome: FC = () => {
               <Text.Title size="small">{appConfig.app.title}</Text.Title>
               {user.state === "hasValue" ? (
                 <Text size="xxSmall" className="text-gray">
-                  Welcome, {user.contents.name}!
+                  Xin chào, {user.contents.name}!
                 </Text>
               ) : (
                 <Text>...</Text>

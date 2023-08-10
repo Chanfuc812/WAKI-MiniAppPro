@@ -1,9 +1,9 @@
-export function isToday(date: Date) {
-  const today = new Date();
+export function isTomorrow(date: Date) {
+  const tomorrow = new Date();
   return (
-    date.getFullYear() === today.getFullYear() &&
-    date.getMonth() === today.getMonth() &&
-    date.getDate() === today.getDate()
+    date.getFullYear() === tomorrow.getFullYear() &&
+    date.getMonth() === tomorrow.getMonth() &&
+    date.getDate() === tomorrow.getDate()
   );
 }
 
@@ -15,7 +15,7 @@ export function displayTime(date: Date) {
 
 export function displayHalfAnHourTimeRange(date: Date) {
   const endTime = new Date(date);
-  endTime.setMinutes(endTime.getMinutes() + 30);
+  endTime.setMinutes(endTime.getMinutes() + 60);
   return `${displayTime(date)} - ${displayTime(endTime)}`;
 }
 
@@ -23,8 +23,8 @@ export function displayDate(date: Date, hint?: boolean) {
   const day = date.getDate().toString().padStart(2, "0");
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear().toString();
-  if (hint && isToday(date)) {
-    return `Hôm nay - ${day}/${month}/${year}`;
+  if (hint && isTomorrow(date)) {
+    return `Ngày mai-${day}/${month}/${year}`;
   }
   return `${day}/${month}/${year}`;
 }

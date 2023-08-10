@@ -170,8 +170,8 @@ export const ProductPicker: FC<ProductPickerProps> = ({
                   >
                     {quantity > 0
                       ? selected
-                        ? "Cập nhật giỏ hàng"
-                        : "Thêm vào giỏ hàng"
+                        ? "Cập nhật Giỏ hàng"
+                        : "Thêm vào Giỏ hàng"
                       : "Xoá"}
                   </Button>
                 ) : (
@@ -182,7 +182,7 @@ export const ProductPicker: FC<ProductPickerProps> = ({
                     fullWidth
                     onClick={addToCart}
                   >
-                    Thêm vào giỏ hàng
+                    Thêm vào Giỏ hàng
                   </Button>
                 )}
               </Box>

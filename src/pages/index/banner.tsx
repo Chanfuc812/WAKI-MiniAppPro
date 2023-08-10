@@ -8,14 +8,16 @@ export const Banner: FC = () => {
   return (
     <Box className="bg-white" pb={4}>
       <Swiper
-        modules={[Pagination]}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay
-        loop
-        cssMode
-      >
+         modules={[Pagination]}
+         pagination={{
+           clickable: true,
+         }}
+         autoplay={{
+           delay: 500, // Thời gian trễ là 15000 ms (15 giây)
+         }}
+         loop
+         cssMode
+       >
         {[1, 2, 3, 4, 5]
           .map((i) => getDummyImage(`banner-${i}.jpg`))
           .map((banner, i) => (

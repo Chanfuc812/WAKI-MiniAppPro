@@ -19,8 +19,8 @@ export const RequestPersonPickerPhone: FC = () => {
   return (
     <ListItem
       onClick={() => retry((r) => r + 1)}
-      title="Chọn người nhận"
-      subtitle="Yêu cầu truy cập số điện thoại"
+      title="Họ và tên - Số điện thoại"
+      subtitle="Thông tin đăng ký Zalo"
     />
   );
 };

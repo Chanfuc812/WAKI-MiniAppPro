@@ -7,6 +7,8 @@ import "swiper/css/pagination";
 import "zmp-ui/zaui.css";
 import "./css/tailwind.css";
 import "./css/app.scss";
+import { favoriteApp } from "zmp-sdk/apis";
+
 
 // Import App Component
 import App from "./components/app";
@@ -18,3 +20,13 @@ if (!window.APP_CONFIG) {
 // Mount React App
 const root = createRoot(document.getElementById("app")!);
 root.render(React.createElement(App));
+
+//Favorite App
+const callAPI = async () => {
+  try {
+    await favoriteApp();
+  } catch (error) {
+    // xử lý khi gọi api thất bại
+    console.log(error);
+  }
+};
