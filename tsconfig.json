@@ -40,5 +40,5 @@
   ],
   "include": [
     "src"
-  ]
+, "docs/dummy/location.ts"  ]
 }

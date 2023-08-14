@@ -45,4 +45,5 @@ export interface Product {
   description?: string;
   sale?: Sale;
   variants?: Variant[];
+  type: "recommend" | "bestSeller" | "new"| "quick" ; 
 }

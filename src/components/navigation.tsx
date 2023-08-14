@@ -6,32 +6,35 @@ import { BottomNavigation, Icon } from "zmp-ui";
 import { CartIcon } from "./cart-icon";
 import chatIcon from "static/iconchat.svg";
 import { openChat } from "zmp-sdk/apis";
+import { Link } from "react-router-dom";
 
 
 const tabs: Record<string, MenuItem> = {
   "/notification": {
-    label: "Thông báo",
+    label: "THÔNG BÁO",
     icon: <Icon icon="zi-notif" />,
   },
   "/message": {
-    label: "Nhắn tin",
+    label: "NHẮN TIN",
     icon: <img src={chatIcon} alt="Chat Icon" />,
   },
   "/": {
-    label: "Trang chủ",
+    label: "TRANG CHỦ",
     icon: <Icon icon="zi-home" />,
   },
   "/cart": {
-    label: "Giỏ hàng",
+    label: "GIỎ HÀNG",
     icon: <CartIcon />,
     activeIcon: <CartIcon active />,
   },
   "/profile": {
-    label: "Cá nhân",
+    label: "CÁ NHÂN",
     icon: <Icon icon="zi-user" />,
   },
 };
-
+<><Link to="/" className={window.location.pathname === "/cart" ? "not-bold" : ""}>TRANG CHỦ</Link>
+<Link to="/other-page">NHẮN TIN</Link>
+<Link to="/another-page">THÔNG BÁO</Link></>
 
 export type TabKeys = keyof typeof tabs;
 
@@ -85,8 +88,12 @@ export const Navigation: FC = () => {
         label={tabs[path].label}
         icon={path === "/message" ? (
           <div onClick={handleChatIconClick}>
-            {activeTab === path ? tabs[path].activeIcon : tabs[path].icon}
-          </div>
+          {activeTab === path ? (
+            <span style={{ fontWeight: "1000" }}>{tabs[path].activeIcon}</span>
+            ) : (
+              <span style={{ fontWeight: "1000" }}>{tabs[path].icon}</span>
+          )}
+        </div>
         ) : (
           tabs[path].icon
         )}

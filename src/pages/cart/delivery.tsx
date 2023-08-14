@@ -9,9 +9,31 @@ import { TimePicker } from "./time-picker";
 export const Delivery: FC = () => {
   return (
     <Box className="space-y-3 px-4">
-      <Text.Header>Thông tin nhận hàng</Text.Header>
+      <Text.Header>Hình thức nhận hàng</Text.Header>
       <ListRenderer
         items={[
+         {
+            left: <Icon icon="zi-call" className="my-auto" />,
+            right: (
+              <Suspense fallback={<RequestPersonPickerPhone />}>
+                <PersonPicker />
+              </Suspense>
+            ),
+          },
+
+          {
+            left: <Icon icon="zi-user" className="my-auto" />,
+            right: (
+              <Box flex>
+                <ElasticTextarea
+                  placeholder="Nhập địa chỉ nhận hàng..."
+                  className="border-none px-0 w-full focus:outline-none"
+                  maxRows={10}
+                />
+              </Box>
+            ),
+          },
+
           {
             left: <Icon icon="zi-location" className="my-auto" />,
             right: (
@@ -34,28 +56,23 @@ export const Delivery: FC = () => {
               </Box>
             ),
           },
-          {
-            left: <Icon icon="zi-user" className="my-auto" />,
-            right: (
-              <Suspense fallback={<RequestPersonPickerPhone />}>
-                <PersonPicker />
-              </Suspense>
-            ),
-          },
+          
+          
           {
             left: <Icon icon="zi-note" className="my-auto" />,
             right: (
               <Box flex>
                 <ElasticTextarea
-                  placeholder="Nhập ghi chú..."
+                  placeholder="Ghi chú..."
                   className="border-none px-0 w-full focus:outline-none"
-                  maxRows={4}
+                  maxRows={10}
                 />
               </Box>
             ),
           },
+          
         ]}
-        limit={4}
+        limit={10}
         renderLeft={(item) => item.left}
         renderRight={(item) => item.right}
       />

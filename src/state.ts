@@ -19,6 +19,7 @@ import { calcFinalPrice, getDummyImage } from "utils/product";
 import { wait } from "utils/async";
 import api from "zmp-sdk";
 
+
 export const userState = selector({
   key: "user",
   get: () => getUserInfo({}).then((res) => res.userInfo),
@@ -415,6 +416,7 @@ export const productsState = selector<Product[]>({
         description,
         categoryId: ["coffee", "milktea", "drinks"],
         variants,
+        type: "bestSeller",
       },
       {
         id: 98,
@@ -428,6 +430,7 @@ export const productsState = selector<Product[]>({
         description,
         categoryId: ["vphong", "pkhach","pngu","ctranh","khac"],
         variants,
+        type: "recommend", 
       },
       {
         id: 99,
@@ -437,6 +440,7 @@ export const productsState = selector<Product[]>({
         description,
         categoryId: ["pkhach","pngu","ctranh","khac"],
         variants,
+        type: "new", 
         sale: {
           type: "fixed",
           amount: 19000,
@@ -447,11 +451,36 @@ export const productsState = selector<Product[]>({
   },
 });
 
+// Sử dụng selector riêng cho từng loại banner
 export const recommendProductsState = selector<Product[]>({
   key: "recommendProducts",
   get: ({ get }) => {
     const products = get(productsState);
-    return products.filter((p) => p.sale);
+    return products.filter((p) => p.type === "recommend" && p.sale );
+  },
+});
+
+export const bestSellerProductsState = selector<Product[]>({
+  key: "bestSellerProducts",
+  get: ({ get }) => {
+    const products = get(productsState);
+    return products.filter((p) => p.type === "bestSeller" && p.sale);
+  },
+});
+
+export const newProductsState  = selector<Product[]>({
+  key: "newProducts",
+  get: ({ get }) => {
+    const products = get(productsState);
+    return products.filter((p) => p.type === "new" && p.sale);
+  },
+});
+
+export const quickPicksState  = selector<Product[]>({
+  key: "quickPicks",
+  get: ({ get }) => {
+    const products = get(productsState);
+    return products.filter((p) => p.type === "quick" && p.sale);
   },
 });
 
@@ -715,5 +744,6 @@ export const phoneState = selector<string | boolean>({
       return false;
     }
     return false;
+    
   },
 });

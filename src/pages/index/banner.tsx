@@ -12,9 +12,7 @@ export const Banner: FC = () => {
          pagination={{
            clickable: true,
          }}
-         autoplay={{
-           delay: 500, // Thời gian trễ là 15000 ms (15 giây)
-         }}
+         autoplay={{ delay: 500 }} // Thời gian trễ là 2000 ms (2 giây)
          loop
          cssMode
        >

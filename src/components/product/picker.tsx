@@ -2,8 +2,8 @@ import { FinalPrice } from "components/display/final-price";
 import { Sheet } from "components/fullscreen-sheet";
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useSetRecoilState } from "recoil";
-import { cartState } from "state";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { cartState, totalPriceState, totalQuantityState } from "state";
 import { SelectedOptions } from "types/cart";
 import { Product } from "types/product";
 import { isIdentical } from "utils/product";
@@ -11,6 +11,7 @@ import { Box, Button, Text } from "zmp-ui";
 import { MultipleOptionPicker } from "./multiple-option-picker";
 import { QuantityPicker } from "./quantity-picker";
 import { SingleOptionPicker } from "./single-option-picker";
+import { Link } from "react-router-dom";
 
 export interface ProductPickerProps {
   product?: Product;
@@ -33,6 +34,7 @@ function getDefaultOptions(product?: Product) {
   }
   return {};
 }
+
 
 export const ProductPicker: FC<ProductPickerProps> = ({
   children,
@@ -175,16 +177,26 @@ export const ProductPicker: FC<ProductPickerProps> = ({
                       : "Xoá"}
                   </Button>
                 ) : (
+                  <>
+                  <div className="button-container">        
                   <Button
                     disabled={!quantity}
-                    variant="primary"
-                    type="highlight"
+                    variant="secondary"
+                    type="neutral"
                     fullWidth
                     onClick={addToCart}
                   >
                     Thêm vào Giỏ hàng
                   </Button>
-                )}
+                  
+                  <Link to="/cart">
+                  <Button variant="primary" type="highlight" fullWidth onClick={addToCart}>
+                    MUA NGAY
+                  </Button>
+                  </Link>
+                  </div>
+                  </>
+                  )}
               </Box>
             </Box>
           )}

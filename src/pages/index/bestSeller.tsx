@@ -6,17 +6,17 @@ import { ProductSlideSkeleton } from "components/skeletons";
 import React, { Suspense } from "react";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
-import { recommendProductsState } from "state";
+import { bestSellerProductsState } from "state"; // Thay vì recommendProductsState
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Box, Text } from "zmp-ui";
 
-export const RecommendContent: FC = () => {
-  const recommendProducts = useRecoilValue(recommendProductsState);
+export const BestSellerContent: FC = () => {
+  const bestSellerProducts = useRecoilValue(bestSellerProductsState); // Thay vì recommendProductsState
 
   return (
-    <Section title="GIẢM GIÁ 49% 🔽" padding="title-only">
+    <Section title="TOP BÁN CHẠY🔝" padding="title-only"> {/* Thay vì "Gợi ý cho bạn" */}
       <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
-        {recommendProducts.map((product) => (
+        {bestSellerProducts.map((product) => (
           <SwiperSlide key={product.id}>
             <ProductPicker product={product}>
               {({ open }) => (
@@ -58,13 +58,13 @@ export const RecommendContent: FC = () => {
   );
 };
 
-export const RecommendFallback: FC = () => {
-  const recommendProducts = [...new Array(3)];
+export const BestSellerFallback: FC = () => {
+  const bestSellerProducts = [...new Array(3)];
 
   return (
-    <Section title="GIẢM GIÁ 49% 🔽" padding="title-only">
+    <Section title="TOP BÁN CHẠY🔝" padding="title-only">
       <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
-        {recommendProducts.map((_, i) => (
+        {bestSellerProducts.map((_, i) => (
           <SwiperSlide key={i}>
             <ProductSlideSkeleton />
           </SwiperSlide>
@@ -74,10 +74,10 @@ export const RecommendFallback: FC = () => {
   );
 };
 
-export const Recommend: FC = () => {
+export const BestSellerBanner: FC = () => {
   return (
-    <Suspense fallback={<RecommendFallback />}>
-      <RecommendContent />
+    <Suspense fallback={<BestSellerFallback />}>
+      <BestSellerContent />
     </Suspense>
   );
 };

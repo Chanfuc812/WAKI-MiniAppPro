@@ -1,24 +1,24 @@
-import { FinalPrice } from "components/display/final-price";
 import { DisplayPrice } from "components/display/price";
 import { ProductPicker } from "components/product/picker";
-import { Section } from "components/section";
 import { ProductSlideSkeleton } from "components/skeletons";
+import { Section } from "components/section";
 import React, { Suspense } from "react";
 import { FC } from "react";
 import { useRecoilValue } from "recoil";
-import { recommendProductsState } from "state";
+import { quickPicksState } from "state";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Box, Text } from "zmp-ui";
+import { FinalPrice } from "components/display/final-price";
 
-export const RecommendContent: FC = () => {
-  const recommendProducts = useRecoilValue(recommendProductsState);
+export const QuickPickContent: FC = () => {
+  const quickPicks = useRecoilValue(quickPicksState);
 
   return (
-    <Section title="GIẢM GIÁ 49% 🔽" padding="title-only">
+    <Section title="KHUNG ẢNH - BẰNG KHEN 💌" padding="title-only">
       <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
-        {recommendProducts.map((product) => (
+        {quickPicks.map((product) => (
           <SwiperSlide key={product.id}>
-            <ProductPicker product={product}>
+             <ProductPicker product={product}>
               {({ open }) => (
                 <div onClick={open} className="space-y-3">
                   <Box
@@ -54,30 +54,30 @@ export const RecommendContent: FC = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </Section>
+      </Section>
   );
 };
 
-export const RecommendFallback: FC = () => {
-  const recommendProducts = [...new Array(3)];
+export const QuickPickFallback: FC = () => {
+  const quickPicks = [...new Array(3)];
 
   return (
-    <Section title="GIẢM GIÁ 49% 🔽" padding="title-only">
+    <Section title="KHUNG ẢNH - BẰNG KHEN 💌" padding="title-only">
       <Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
-        {recommendProducts.map((_, i) => (
+        {quickPicks.map((_, i) => (
           <SwiperSlide key={i}>
             <ProductSlideSkeleton />
           </SwiperSlide>
         ))}
       </Swiper>
-    </Section>
+      </Section>
   );
 };
 
-export const Recommend: FC = () => {
+export const QuickPicks: FC = () => {
   return (
-    <Suspense fallback={<RecommendFallback />}>
-      <RecommendContent />
+    <Suspense fallback={<QuickPickFallback />}>
+      <QuickPickContent />
     </Suspense>
   );
 };

@@ -116,3 +116,20 @@ body {
     }
   }
 }
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Điều chỉnh khoảng cách theo ý muốn */
+}
+
+.bold-text {
+  font-weight:"800";
+}
+
+.not-bold {
+  font-weight: normal;
+}
+
+.text-right {
+  white-space: nowrap;
+}
